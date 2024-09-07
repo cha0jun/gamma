@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Button } from '@/components/ui/button'
 
 defineProps<{ msg: string }>()
 
@@ -32,6 +33,11 @@ const count = ref(0)
     >.
   </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+
+  <Button>
+    click
+  </Button>
+
 </template>
 
 <style scoped>
