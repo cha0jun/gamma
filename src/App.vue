@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import Main from './components/LandTop.vue'
+import LandTop from './components/LandTop.vue'
+import LandMain from './components/LandMain.vue';
 </script>
 
 <template>
-    <Main></Main>
+ <div class="flex justify-center flex-col p-20">
+ <LandTop></LandTop>
+ <LandMain></LandMain>
+ </div>   
 </template>
 
 <style scoped>
