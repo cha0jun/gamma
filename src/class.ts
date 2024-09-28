@@ -1,8 +1,4 @@
 export default class creditCardDetails {
+    Name: String;
     
-
-    constructor(name:String, Provider:String, Details:String, ImgUrl:String){
-        this.Name = name;
-
-    }
 }
