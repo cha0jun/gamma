@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import ref from 'vue';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { Card } from '@/components/ui/card'
-import defineProps from 'vue';
+import { defineProps } from 'vue';
 
-const props = defineProps({
-    catItems: {
-        type: Array,
-        required: true,
-    },
-});
+interface CategoryItem {
+        id?: number
+        name?: string
+        isActive?: boolean
+}
+
+interface CategoryGroupProps {
+    catItems?: CategoryItem[]
+}
+
+const props = defineProps<CategoryGroupProps>();
 
 const emit = defineEmits(['categorySelected']);
 
-const onPressed = (id) => {
+const onPressed = (id?:number) => {
 
 emit('categorySelected', id);
 };
@@ -22,9 +25,9 @@ emit('categorySelected', id);
 <template>
         <ToggleGroup type="multiple" variant="outline" size="lg">
                 <ToggleGroupItem 
-                    v-for="cat in catItems" 
+                    v-for="cat in props.catItems" 
                     :key="cat.id" 
-                    :value="cat.name" 
+                    :value="cat.name??''" 
                     @click="onPressed(cat.id)">
                         {{ cat.name }}
                     </ToggleGroupItem>

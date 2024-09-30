@@ -6,6 +6,10 @@ import {
     CardDescription,
  } from './ui/card';
 
+ interface CardDetails {
+
+ }
+ 
  defineProps({
     Name: String,
     Provider: String,

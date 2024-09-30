@@ -7,6 +7,7 @@ import CardRecord from '@/components/CardRecord.vue'
 import CategoryGroup from '@/components/CategoryGroup.vue'
 import { ref } from 'vue';
 
+
 const catItems = ref([
     { id: 0, name: 'Local General Spending', isActive: false },
     { id: 1, name: 'Shopping', isActive: false },
@@ -17,7 +18,7 @@ const catItems = ref([
   ]);
 
 // filter selected spend category
-const filterSelectedCat = (id) =>{
+const filterSelectedCat = (id:number) =>{
   console.log(id);
   
 }
