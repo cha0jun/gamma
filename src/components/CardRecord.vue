@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import {
     Card,
     CardTitle,
@@ -7,28 +6,22 @@ import {
  } from './ui/card';
 
  interface CardDetails {
-
+    name?: string
+    provider?: string
+    details?: string[]
+    imgurl?: string
  }
  
- defineProps({
-    Name: String,
-    Provider: String,
-    Details: {
-        type: Array,
-        required: true
-    },
-    ImgUrl: String
- })
+const props = defineProps<CardDetails>();
+
 </script>
 <template>
     <Card class="flex p-5 rounded-2xl items-center">
-        <img v-bind:src="ImgUrl" class="rounded-xl cc-small mr-10">
+        <img v-bind:src="props.imgurl" class="rounded-xl cc-small mr-10">
         <div class="grid grid-cols-1 gap-1">
-            <CardTitle>{{ Name }}</CardTitle>
-            <CardDescription>{{ Provider }}</CardDescription>
-                <li v-for="detail in Details" 
-                    :key="detail.id"
-                    >{{ detail }}</li>
+            <CardTitle>{{ props.name }}</CardTitle>
+            <CardDescription>{{ props.provider }}</CardDescription>
+                <li v-for="detail in props.details">{{ detail }}</li>
         </div>
     </Card>
 </template>
