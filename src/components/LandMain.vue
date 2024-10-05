@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import {
-  Card
-} from '@/components/ui/card'
 
 import CardList from '@/components/CardList.vue'
 import CategoryGroup from '@/components/CategoryGroup.vue'
