@@ -26,8 +26,8 @@ const props = defineProps<CardItems>();
             <Card id="ccRecord" class="flex p-5 rounded-2xl items-center max-sm:flex-col"
             v-for="card in props.cardItems"
             :key="card.id">
-                <img v-bind:src="card.imgurl" class="rounded-xl cc-small lg:mt-10 lg:mr-10 mb-5">
-                <div class="grid grid-cols-1 gap-1 max-sm:ml-10">
+                <img v-bind:src="card.imgurl" class="rounded-xl cc-small">
+                <div class="grid grid-cols-1 gap-1 p-10">
                     <CardTitle>{{ card.name }}</CardTitle>
                     <CardDescription>{{ card.provider }}</CardDescription>
                     <li v-for="detail in card.details">{{ detail }}</li>

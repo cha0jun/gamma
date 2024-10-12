@@ -36,7 +36,7 @@ const filterSelectedCat = (id:number) =>{
 </script>
 
 <template>
-  <div class="flex flex-col gap-7">
+  <div class="flex flex-col gap-7 px-10 pb-10">
       <CategoryGroup :catItems="catItems" @categorySelected="filterSelectedCat">       
       </CategoryGroup> 
       <CardList v-bind:card-items="cardItems"></CardList>
