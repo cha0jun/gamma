@@ -4,7 +4,7 @@ import LandMain from './components/LandMain.vue';
 </script>
 
 <template>
- <div class="flex justify-center flex-col p-20">
+ <div class="flex justify-center flex-col max-sm:p10 lg:p-20">
  <LandTop></LandTop>
  <LandMain></LandMain>
  </div>   

@@ -6,7 +6,7 @@ import {
  } from './ui/card';
 
 
- interface CardDetails {
+export interface CardDetails {
     id?: number
     name?: string
     provider?: string
@@ -23,11 +23,11 @@ const props = defineProps<CardItems>();
 </script>
 <template>
         <Card id="ccList" class="p-10 rounded-2xl flex flex-col gap-7">
-            <Card id="ccRecord" class="flex p-5 rounded-2xl items-center"
+            <Card id="ccRecord" class="flex p-5 rounded-2xl items-center max-sm:flex-col"
             v-for="card in props.cardItems"
             :key="card.id">
-                <img v-bind:src="card.imgurl" class="rounded-xl cc-small mr-10">
-                <div class="grid grid-cols-1 gap-1">
+                <img v-bind:src="card.imgurl" class="rounded-xl cc-small lg:mt-10 lg:mr-10 mb-5">
+                <div class="grid grid-cols-1 gap-1 max-sm:ml-10">
                     <CardTitle>{{ card.name }}</CardTitle>
                     <CardDescription>{{ card.provider }}</CardDescription>
                     <li v-for="detail in card.details">{{ detail }}</li>

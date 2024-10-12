@@ -4,7 +4,6 @@ import CardList from '@/components/CardList.vue'
 import CategoryGroup from '@/components/CategoryGroup.vue'
 import { ref } from 'vue';
 
-
 const catItems = ref([
     { id: 0, name: 'Local General Spending', isActive: false },
     { id: 1, name: 'Shopping', isActive: false },

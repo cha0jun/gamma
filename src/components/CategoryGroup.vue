@@ -23,7 +23,7 @@ emit('categorySelected', id);
 
 </script>
 <template>
-        <ToggleGroup type="multiple" variant="outline" size="lg">
+        <ToggleGroup type="multiple" variant="outline" size="lg" class="initial flex-wrap grow gap-4">
                 <ToggleGroupItem 
                     v-for="cat in props.catItems" 
                     :key="cat.id" 
