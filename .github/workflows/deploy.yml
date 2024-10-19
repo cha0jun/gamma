@@ -19,7 +19,7 @@ jobs:
           script: |
             mkdir test
             cd test
-            git clone git@github.com:cha0jun/gamma.git
+            git pull
             echo 'Deployment successful to droplet'
             npm run build
             rsync -a --delete /gamma/dist /var/www/html
