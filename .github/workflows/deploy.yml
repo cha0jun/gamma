@@ -24,6 +24,7 @@ jobs:
             source ~/.nvm/nvm.sh
             npm install
             npm run build
-            cp -R /gamma/dist /var/www/html
+            cd gamma
+            cp -r dist/. /var/www/html
             echo 'Remote build successful in droplet'
           
