@@ -20,9 +20,10 @@ jobs:
             cd gamma
             git pull
             echo 'Deployment successful to droplet'
-            npm ci
-            npm i
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            npm install
             npm run build
-            rsync -a --delete /gamma/dist /var/www/html
+            rsync -a --delete ~/gamma/dist /var/www/html
             echo 'Remote build successful in droplet'
           
