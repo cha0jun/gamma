@@ -17,8 +17,7 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
 
           script: |
-            mkdir test
-            cd test
+            cd gamma
             git pull
             echo 'Deployment successful to droplet'
             npm run build
