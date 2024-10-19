@@ -5,7 +5,6 @@ import LandMain from './components/LandMain.vue';
 
 <template>
  <div class="flex justify-center flex-col max-sm:p10 lg:p-20">
-  <h1>E2E PUSH TEST</h1>
  <LandTop></LandTop>
  <LandMain></LandMain>
  </div>   
