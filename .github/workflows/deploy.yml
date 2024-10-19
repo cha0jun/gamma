@@ -20,6 +20,8 @@ jobs:
             cd gamma
             git pull
             echo 'Deployment successful to droplet'
+            npm ci
+            npm i
             npm run build
             rsync -a --delete /gamma/dist /var/www/html
             echo 'Remote build successful in droplet'
