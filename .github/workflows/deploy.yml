@@ -24,6 +24,6 @@ jobs:
             source ~/.nvm/nvm.sh
             npm install
             npm run build
-            rsync -a --delete ~/gamma/dist /var/www/html
+            cp -R /gamma/dist /var/www/html
             echo 'Remote build successful in droplet'
           
