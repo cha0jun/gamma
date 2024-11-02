@@ -1,29 +1,34 @@
-name: Build & Deploy
+name: build-deploy
 
 on:
   push:
     branches: [main]
 
 jobs:
-  deploy:
+  build:
     environment: droplet
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Vue app
-        uses: appleboy/ssh-action@v1.1.0
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.5.1'
+      - run: | 
+          npm install
+          npm run build
+      - name: Deploy app
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{secrets.SSH_HOST}}
-          key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
+          key: ${{secrets.SSH_KEY}}
+          source: './dist'
+          target: '~/site'
 
-          script: |
-            cd gamma
-            git pull
-            echo 'Deployment successful to droplet'
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            npm install
-            npm run build
-            cp -r dist/. /var/www/html
-            echo 'Remote build successful in droplet'
+
+
+
+            
           
