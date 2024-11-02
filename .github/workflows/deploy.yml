@@ -17,17 +17,13 @@ jobs:
       - run: | 
           npm install
           npm run build
-  deploy:
-    environment: droplet
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy app
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{secrets.SSH_HOST}}
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
-          source: '~/dist'
+          source: '.'
           target: '~/site'
 
 
