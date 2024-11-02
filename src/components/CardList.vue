@@ -12,9 +12,10 @@ export interface CardDetails {
     provider?: string
     details?: string[]
     imgurl?: string
+    spendCat?: number
  }
 
- interface CardItems {
+ export interface CardItems {
     cardItems?: CardDetails[]
  }
  

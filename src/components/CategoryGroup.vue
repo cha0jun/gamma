@@ -14,11 +14,11 @@ interface CategoryGroupProps {
 
 const props = defineProps<CategoryGroupProps>();
 
-const emit = defineEmits(['categorySelected']);
+const emit = defineEmits(['category-selected']);
 
 const onPressed = (id?:number) => {
 
-emit('categorySelected', id);
+emit('category-selected', id);
 };
 
 </script>

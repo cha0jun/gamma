@@ -10,7 +10,6 @@
   </div> 
   <img id="cc" src="/src/assets/cc.jpg" class="max-sm:hidden rounded-xl lg:grow cc">
 </div>
-<p>Another test for e2e push</p>
 </template>
 
 <style scoped>
