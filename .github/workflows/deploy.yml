@@ -40,3 +40,6 @@ jobs:
           ssh -o "StrictHostKeyChecking no" ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
           scp -r dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:/site
           echo 'deployment successful'
+
+          ssh -o "StrictHostKeyChecking no" ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
+          http-server ~/site/dist -p 443 --ssl
