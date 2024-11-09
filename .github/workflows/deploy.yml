@@ -9,26 +9,25 @@ jobs:
     environment: droplet
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
-        uses: actions/checkout@v3
-      - name: use node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22.5.1'
-      - run: | 
+      #  - name: checkout repo
+      #    uses: actions/checkout@v3
+      #  - name: use node.js
+      #    uses: actions/setup-node@v3
+      #    with:
+      #      node-version: '22.5.1'
+      #  - run: |
+      #      npm install
+      #      npm run build
+      #  - name: Deploy app
+      #    uses: appleboy/scp-action@v0.1.7
+      #    with:
+      #     host: ${{secrets.SSH_HOST}}
+      #      username: ${{secrets.SSH_USERNAME}}
+      #      key: ${{secrets.SSH_KEY}}
+      #      source: './dist'
+      #      target: '~/site'
+      - run: |
           npm install
           npm run build
-      - name: Deploy app
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{secrets.SSH_HOST}}
-          username: ${{secrets.SSH_USERNAME}}
-          key: ${{secrets.SSH_KEY}}
-          source: './dist'
-          target: '~/site'
-
-
-
-
-            
-          
+          scp -r ~/gamma/dist root@${{secrets.SSH_HOST}}:/site
+          echo 'deploymeny successful'
