@@ -27,7 +27,7 @@ jobs:
       #      source: './dist'
       #      target: '~/site'
       - run: |
-          npm -v
+          npm --v
           npm ci
           npm run build
           scp -r ~/gamma/dist root@${{secrets.SSH_HOST}}:/site
