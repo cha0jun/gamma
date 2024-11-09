@@ -27,7 +27,7 @@ jobs:
       #      source: './dist'
       #      target: '~/site'
       - name: checkout repo
-       uses: actions/checkout@v3
+        uses: actions/checkout@v3
       - run: |
           npm --v
           npm install
