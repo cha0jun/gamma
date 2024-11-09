@@ -38,5 +38,5 @@ jobs:
           npm install
           npm run build
           ssh -o "StrictHostKeyChecking no" ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
-          scp -r ~/gamma/dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:/site
+          scp -r ~/dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:/site
           echo 'deployment successful'
