@@ -27,7 +27,9 @@ jobs:
       #      source: './dist'
       #      target: '~/site'
       - run: |
-          npm install
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+          npm -v
+          npm ci
           npm run build
           scp -r ~/gamma/dist root@${{secrets.SSH_HOST}}:/site
           echo 'deploymeny successful'
