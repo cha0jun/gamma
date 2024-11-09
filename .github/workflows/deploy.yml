@@ -28,7 +28,7 @@ jobs:
       #      target: '~/site'
       - run: |
           npm --v
-          npm ci
+          npm install
           npm run build
           scp -r ~/gamma/dist root@${{secrets.SSH_HOST}}:/site
           echo 'deploymeny successful'
