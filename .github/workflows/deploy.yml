@@ -24,8 +24,5 @@ jobs:
           npm run build
           scp -r ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:~/site
 
-      - name: start server
-        uses: actions/setup-node@v3
-      - run: |
           ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
           http-server ~/site/dist --ssl -p 443
