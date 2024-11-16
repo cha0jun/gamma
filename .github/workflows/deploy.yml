@@ -9,24 +9,7 @@ jobs:
     environment: droplet
     runs-on: ubuntu-latest
     steps:
-      #  - name: checkout repo
-      #    uses: actions/checkout@v3
-      #  - name: use node.js
-      #    uses: actions/setup-node@v3
-      #    with:
-      #      node-version: '22.5.1'
-      #  - run: |
-      #      npm install
-      #      npm run build
-      #  - name: Deploy app
-      #    uses: appleboy/scp-action@v0.1.7
-      #    with:
-      #     host: ${{secrets.SSH_HOST}}
-      #      username: ${{secrets.SSH_USERNAME}}
-      #      key: ${{secrets.SSH_KEY}}
-      #      source: './dist'
-      #      target: '~/site'
-      - name: checkout repo
+      - name: checkout repo & deploy app
         uses: actions/checkout@v3
       - run: |
           mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
@@ -40,3 +23,9 @@ jobs:
           npm i
           npm run build
           scp -r ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:~/site
+
+      - name: start server
+        uses: actions/setup-node@v3
+      - run: |
+          ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
+          http-server ~/site/dist --ssl -p 443
