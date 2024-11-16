@@ -25,4 +25,5 @@ jobs:
           scp -r ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:~/site
 
           ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
-          npx http-server ~/site/dist --ssl -p 443
+          cd /root
+          http-server ~/site/dist --ssl -p 443
