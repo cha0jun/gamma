@@ -23,8 +23,3 @@ jobs:
           npm i
           npm run build
           scp -r ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:~/site
-
-          ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
-          cd ~/site
-          ls
-          http-server /dist --ssl -p 443
