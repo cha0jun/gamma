@@ -26,8 +26,11 @@ jobs:
           echo 'build & push successful'
 
           echo 'start rolling update'
-          ssh -t -t ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
-          ls
-        ## tmux new-session -d -s "8080" http-server ~/site/dist -p 8080
-        ## tmux new-session -d -s "8081" http-server ~/site/dist -p 8081
-        ## echo 'update successful'
+          ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}'
+            tmux ls
+            tmux kill-session -t 8080  
+            tmux new-session -d -s "8080" http-server ~/site/dist -p 8080
+            tmux kill-session -t 8081
+            tmux new-session -d -s "8081" http-server ~/site/dist -p 8081
+          '
+          echo 'update successful'
