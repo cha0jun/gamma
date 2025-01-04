@@ -23,3 +23,12 @@ jobs:
           npm i
           npm run build
           scp -r ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:~/site
+          echo 'build & push successful'
+
+          echo 'start rolling update'
+          ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
+          tmux kill-ses -t 8080
+          tmux new-session -d -s "8080" http-server ~/site/dist -p 8080
+          tmux kill-ses -t 8081
+          tmux new-session -d -s "8081" http-server ~/site/dist -p 8081
+          echo 'update successful'
