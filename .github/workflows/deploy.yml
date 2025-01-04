@@ -19,14 +19,16 @@ jobs:
           echo 'ssh keys added'
 
           ssh -o "StrictHostKeyChecking no" ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
-          ls
+
 
           npm i
           npm run build
           scp -r ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:~/site
           echo 'build & push successful'
 
-        ## echo 'start rolling update'
+          echo 'start rolling update'
+          ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
+          ls
         ## tmux new-session -d -s "8080" http-server ~/site/dist -p 8080
         ## tmux new-session -d -s "8081" http-server ~/site/dist -p 8081
         ## echo 'update successful'
