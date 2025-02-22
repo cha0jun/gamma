@@ -1,7 +1,8 @@
-name: build-deploy
+name: merge
 on:
   push:
-    branches: [main]
+    branches:
+      - auth-bot
 
 jobs:
   release:
@@ -43,32 +44,37 @@ jobs:
           git merge origin/auth-bot
           git push
 
-  build:
-    environment: droplet
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout repo & deploy app
-        uses: actions/checkout@v4
-      - run: |
-          mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
-          ssh-keyscan gamma-squid.xyz >> ~/.ssh/known_hosts
-          eval $(ssh-agent)
-          ssh-add - <<< "${{secrets.SSH_SECRET_KEY}}"
-          echo 'ssh keys added'
+# on:
+# push:
+# branches: [main]
 
-          ssh -o "StrictHostKeyChecking no" ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
+# jobs:
+# build:
+# environment: droplet
+# runs-on: ubuntu-latest
+# steps:
+# - name: checkout repo & deploy app
+# uses: actions/checkout@v4
+# - run: |
+# mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
+# ssh-keyscan gamma-squid.xyz >> ~/.ssh/known_hosts
+# eval $(ssh-agent)
+# ssh-add - <<< "${{secrets.SSH_SECRET_KEY}}"
+# echo 'ssh keys added'
 
-          npm i
-          npm run build
-          scp -r ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:~/site
-          echo 'build & push successful'
+# ssh -o "StrictHostKeyChecking no" ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
 
-          echo 'start rolling update'
-          ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}} '
-            tmux ls
-            tmux kill-session -t 8080  
-            tmux new-session -d -s "8080" http-server ~/site/dist -p 8080
-            tmux kill-session -t 8081
-            tmux new-session -d -s "8081" http-server ~/site/dist -p 8081
-          '
-          echo 'update successful'
+# npm i
+# npm run build
+# scp -r ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:~/site
+# echo 'build & push successful'
+
+# echo 'start rolling update'
+# ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}} '
+# tmux ls
+# tmux kill-session -t 8080
+# tmux new-session -d -s "8080" http-server ~/site/dist -p 8080
+# tmux kill-session -t 8081
+# tmux new-session -d -s "8081" http-server ~/site/dist -p 8081
+
+# echo 'update successful'
