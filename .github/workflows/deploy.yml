@@ -1,16 +1,53 @@
 name: build-deploy
-
 on:
   push:
     branches: [main]
 
 jobs:
+  release:
+    name: auth-bot release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "write"
+      packages: "write"
+      actions: "read"
+    steps:
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.AUTH_BOT_PRIVATE_KEY}}
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token}}
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+      - name: publish
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: |
+          git add . 
+          git commit -m 'auth-bot commit'
+          git push
+
+      - name: Merge branch into main
+        run: |
+          git checkout main
+          git pull
+          git merge origin/auth-bot
+          git push
+
   build:
     environment: droplet
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo & deploy app
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - run: |
           mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
           ssh-keyscan gamma-squid.xyz >> ~/.ssh/known_hosts
