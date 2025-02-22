@@ -5,6 +5,7 @@ on:
 
 jobs:
   release:
+    environment: droplet
     name: auth-bot release
     runs-on: ubuntu-latest
     permissions:
